@@ -10,37 +10,59 @@ import React, { useState } from "react";
  * { TodoApp, EditableTodo } -> TodoForm
  */
 
-function TodoForm() {
+function TodoForm({ handleSave }) {
+
+const initialState = {
+  title: "",
+  description: "",
+  priority: 1
+}
+
+  const [formData, setFormData] = useState(initialState);
+
+  console.log("HERE IS OUR FORM DATA ===>", formData);
 
   /** Update form input. */
-  function handleChange(evt) { }
+  function handleChange(evt) {
+    const { name, value } = evt.target;
+    setFormData(currData => ({
+      ...currData,
+      [name]: value,
+    }));
+   }
 
   /** Call parent function and clear form. */
-  function handleSubmit(evt) { }
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    handleSave(formData);
+    setFormData(initialState);
+  }
 
   return (
       <form className="NewTodoForm" onSubmit={handleSubmit}>
 
         <div className="mb-3">
+          <label htmlFor="title">Title:</label>
           <input
               id="newTodo-title"
               name="title"
               className="form-control"
               placeholder="Title"
               onChange={handleChange}
-              value="FIXME"
+              value={formData.title}
               aria-label="Title"
           />
         </div>
 
         <div className="mb-3">
+          <label htmlFor="description">Description:</label>
           <textarea
               id="newTodo-description"
               name="description"
               className="form-control"
               placeholder="Description"
               onChange={handleChange}
-              value="FIXME"
+              value={formData.description}
               aria-label="Description"
           />
         </div>
@@ -52,7 +74,7 @@ function TodoForm() {
             </label>
             <select id="newTodo-priority"
                     name="priority"
-                    value="FIXME"
+                    value={formData.priority}
                     onChange={handleChange}
                     className="form-control form-control-sm d-inline-flex"
             >

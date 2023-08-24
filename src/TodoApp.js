@@ -19,9 +19,11 @@ import TodoForm from "./TodoForm";
 function TodoApp({ initialTodos }) {
   const [todos, setTodos] = useState(initialTodos);
 
+  console.log("HERE ARE OUR TODOS ===> ", todos);
+
   /** add a new todo to list */
   function create(newTodo) {
-
+    newTodo.priority = Number(newTodo.priority);
     let newTD = { ...newTodo, id: uuid() };
 
     setTodos(currTodos => [...currTodos, newTD]);
@@ -48,7 +50,7 @@ function TodoApp({ initialTodos }) {
           (if no top todo, omit this whole section)
           <section className="mb-4">
             <h3>Top Todo</h3>
-            <TopTodo />
+            <TopTodo todos={todos}/>
           </section>
 
           <section>
