@@ -5,20 +5,24 @@ import Todo from "./Todo";
 
 /** Shows the top todo.
  *
- * Props:
- * - todos
+ * Props: - todos
+ *
+ * State :none
  *
  * TodoApp -> TopTodo
  */
 
 function TopTodo({ todos }) {
   // lowest-priority # is the highest priority
-  let top = todos.reduce((acc, cur) => cur.priority < acc.priority ? cur : acc, todos[0]);
+  let top = todos.reduce(
+    (acc, cur) =>
+      cur.priority < acc.priority ? cur : acc, todos[0]
+  );
   console.log("TOP IS ===> ", top);
 
   return (
     <div>
-    {top && <Todo todo={top}/>}
+      <Todo todo={top} />
     </div>
   );
 }
