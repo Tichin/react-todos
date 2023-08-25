@@ -13,10 +13,10 @@ describe("productiv app", function () {
         description: "Write some code",
         priority: 2,
       }
-  ]}/>);
+    ]} />);
   });
 
-  it("it can submit form data", function () {
+  it("it can add new todo", function () {
     const { queryByText, getByLabelText, debug, container } = render(<TodoApp initialTodos={[
       {
         id: 1,
@@ -24,9 +24,9 @@ describe("productiv app", function () {
         description: "Write some code",
         priority: 2,
       }
-  ]}/>);
+    ]} />);
 
-  debug(container);
+    debug(container);
 
     expect(queryByText("make dinner")).not.toBeInTheDocument();
 
@@ -40,12 +40,52 @@ describe("productiv app", function () {
     fireEvent.change(priorityInput, { target: { value: '3' } });
     fireEvent.click(submitBtn);
 
-   expect(queryByText("make dinner")).toBeInTheDocument();
+    expect(queryByText("make dinner")).toBeInTheDocument();
 
   });
 
 
+  it("it can update a todo", function () {
+    const { queryByText, debug, container } = render(<TodoApp initialTodos={[
+      {
+        id: 1,
+        title: "Code!",
+        description: "Write some code",
+        priority: 1,
+      },
+      {
+        id: 2,
+        title: "Make dinner!",
+        description: "make big dinner",
+        priority: 2,
+      }
+    ]} />);
 
+    debug(container);
+
+    expect(queryByText("Make dinner!")).toBeInTheDocument();
+
+    const titleInput = container.querySelector('#newTodo-title-2');
+    const descriptionInput = container.querySelector("#newTodo-description-2");
+    const priorityInput = container.querySelector("#newTodo-priority-2");
+    const submitBtn = container.querySelector(".NewTodoForm-addBtn-2");
+
+    fireEvent.change(titleInput, { target: { value: 'make lunch' } });
+    fireEvent.change(descriptionInput, { target: { value: 'make big lunch' } });
+    fireEvent.change(priorityInput, { target: { value: 3 } });
+    fireEvent.click(submitBtn);
+
+    expect(queryByText("make lunch")).toBeInTheDocument();
+    expect(queryByText("make big lunch")).toBeInTheDocument();
+    expect(queryByText("(priority: 3)")).toBeInTheDocument();
+
+    expect(queryByText("Make dinner!")).not.toBeInTheDocument();
+
+
+  });
+
+
+  //.EditableTodo-toggle:nth-of-type(2)
   // it("contains expected title", function () {
   //   const result = render(<App />);
   //   expect(result.queryByText("Prøductïv")).toBeInTheDocument();

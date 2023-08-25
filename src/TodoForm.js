@@ -17,7 +17,7 @@ const initialState = {
   priority: 1
 };
 
-function TodoForm({ handleSave, initialFormData = initialState }) {
+function TodoForm({ handleSave, initialFormData = initialState, id }) {
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -44,9 +44,9 @@ function TodoForm({ handleSave, initialFormData = initialState }) {
     <form className="NewTodoForm" onSubmit={handleSubmit}>
 
       <div className="mb-3">
-        <label htmlFor="newTodo-title">Title:</label>
+        <label htmlFor={`newTodo-title-${id}`}>Title:</label>
         <input
-          id="newTodo-title"
+          id={`newTodo-title-${id}`}
           name="title"
           className="form-control"
           placeholder="Title"
@@ -57,9 +57,9 @@ function TodoForm({ handleSave, initialFormData = initialState }) {
       </div>
 
       <div className="mb-3">
-        <label htmlFor="newTodo-description">Description:</label>
+        <label htmlFor={`newTodo-description-${id}`}>Description:</label>
         <textarea
-          id="newTodo-description"
+          id={`newTodo-description-${id}`}
           name="description"
           className="form-control"
           placeholder="Description"
@@ -71,10 +71,10 @@ function TodoForm({ handleSave, initialFormData = initialState }) {
 
       <div className="mb-3 d-flex justify-content-between">
         <div className="w-75 d-flex justify-content-between">
-          <label htmlFor="newTodo-priority"
+          <label htmlFor={`newTodo-priority-${id}`}
             className="d-inline-flex">Priority:&nbsp;&nbsp;
           </label>
-          <select id="newTodo-priority"
+          <select id={`newTodo-priority-${id}`}
             name="priority"
             value={formData.priority}
             onChange={handleChange}
@@ -85,7 +85,7 @@ function TodoForm({ handleSave, initialFormData = initialState }) {
             <option value={3}>Meh</option>
           </select>
         </div>
-        <button className="btn-primary rig btn btn-sm NewTodoForm-addBtn">
+        <button className={`btn-primary rig btn btn-sm NewTodoForm-addBtn-${id}`}>
           Gø!
         </button>
       </div>

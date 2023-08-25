@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react";
 import EditableTodo from "./EditableTodo";
 
 
-it("can update existing todo", function(){
+it("can update existing todo", function () {
   const { queryByText, getByLabelText, container } = render(<EditableTodo todo={[
     {
       id: 2,
@@ -11,7 +11,7 @@ it("can update existing todo", function(){
       description: "write some code",
       priority: 3,
     }
-  ]}/>);
+  ]} />);
 
   expect(queryByText("write some code")).toBeInTheDocument();
 
@@ -27,3 +27,4 @@ it("can update existing todo", function(){
   expect(queryByText("write all the code you can")).toBeInTheDocument();
 
 });
+
