@@ -16,9 +16,11 @@ function EditableTodo({ todo, update, remove }) {
   const [isEditing, setIsEditing] = useState(false);
   const { id } = todo;
 
-  //  TODO: make it a true toggle or
   /** Toggle if this is being edited */
   function toggleEdit() {
+
+    /* setIsEditing(edit => !edit);
+    */
     setIsEditing(true);
   }
 
