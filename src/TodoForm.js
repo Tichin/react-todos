@@ -44,7 +44,7 @@ function TodoForm({ handleSave, initialFormData = initialState }) {
     <form className="NewTodoForm" onSubmit={handleSubmit}>
 
       <div className="mb-3">
-        <label htmlFor="title">Title:</label>
+        <label htmlFor="newTodo-title">Title:</label>
         <input
           id="newTodo-title"
           name="title"
@@ -57,7 +57,7 @@ function TodoForm({ handleSave, initialFormData = initialState }) {
       </div>
 
       <div className="mb-3">
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="newTodo-description">Description:</label>
         <textarea
           id="newTodo-description"
           name="description"
