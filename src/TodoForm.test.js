@@ -1,7 +1,15 @@
 import React from "react";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import TodoForm from "./TodoForm";
-import Todo from "./Todo";
+
+function mockSave({ todo }){
+  expect(todo).toEqual({
+    title: "code",
+    description: "code more today",
+    priority: 2
+  })
+}
+
 
 
 describe("Todo", function () {
@@ -15,35 +23,16 @@ describe("Todo", function () {
     expect(container).toMatchSnapshot();
   });
 
+  it("handles form submission on save", function(){
+    const { } = render(<TodoForm handleSave={(mockSave)} initialFormData={{
+      title: "don't code!",
+      description: "code more today",
+      priority: 2 }
+    }/>);
 
-  it("it can submit form data", function () {
-    const { queryByText, getByLabelText } = render(<TodoForm />);
-    const { container } = render(< Todo todo={
-      {
-        id: 1,
-        title: "Code!",
-        description: "Write some code",
-        priority: 2,
-      }} />);
-
-    expect(container).not.toContainHTML(`<div><div class="Todo"><div><b>make dinner</b> <small>(priority: 1)</small>`
-      + `</div><div><small>make big dinner</small></div></div></div>`);
-
-    const titleInput = getByLabelText("Title:");
-    const descriptionInput = getByLabelText("Description:");
-    const priorityInput = getByLabelText("Priority:");
-    const submitBtn = queryByText("Gø!");
-
-    fireEvent.change(titleInput, { target: { value: 'make dinner' } });
-    fireEvent.change(descriptionInput, { target: { value: 'make big dinner' } });
-    fireEvent.change(priorityInput, { target: { value: '1' } });
-    fireEvent.click(submitBtn);
-
-    expect(container).toContainHTML(`<div><div class="Todo"><div><b>make dinner</b> <small>(priority: 1)</small>`
-      + `</div><div><small>make big dinner</small></div></div></div>`);
+    expect.assertions(1); //do after you type into title field and after you press save button, proves that your mockSave assertion has fired
 
   });
 
-
-
+  //give initial data and function for save
 });
